@@ -1,105 +1,73 @@
-# 🎬 Movie Recommender System
+# 🎬 Movie Recommendation System
 
-This is a simple **Movie Recommendation Web App** built with **Streamlit** and **The Movie Database (TMDb) API**.
-The app recommends 5 similar movies based on a movie selected by the user and displays their posters.
-
----
+This project is a **Content-Based Movie Recommendation System**.
+It uses **TMDB 5000 Movies Dataset** and **Streamlit** for the user interface.
 
 ## 🚀 Features
 
-* Choose your favorite movie from a dropdown list.
-* Get **5 movie recommendations** with titles and posters.
-* Uses **cosine similarity** (precomputed and stored in `similarity.pkl`) for recommendations.
-* Fetches posters dynamically from the **TMDb API**.
+* Preprocess movie data (genres, keywords, cast, crew).
+* Create tags for each movie using NLP and stemming.
+* Vectorize tags with **CountVectorizer**.
+* Find similarity with **cosine similarity**.
+* Recommend top 5 movies with **posters** from TMDB API.
 
----
+## 📂 Dataset
 
-## 📂 Project Structure
+The dataset is from Kaggle:
+
+* `tmdb_5000_movies.csv`
+* `tmdb_5000_credits.csv`
+
+If you have a zip file, extract it before running the code.
+
+## ⚙️ Installation
+
+Clone the repo:
+
+```bash
+git clone https://github.com/your-username/movie-recommender.git
+cd movie-recommender
+```
+
+Install requirements:
+
+```bash
+pip install -r requirements.txt
+```
+
+## 📄 Requirements
+
+Create a file named `requirements.txt` with this content:
 
 ```
-Movie_Recommender/
-│── app.py               # Main Streamlit application
-│── movies.pkl           # Pickle file containing movie dataset
-│── similarity.pkl       # Pickle file with similarity matrix
-│── README.md            # Project documentation
-│── requirements.txt     # Python dependencies
-```
-
----
-
-## ⚙️ Installation (Local)
-
-1. **Clone the repository**
-
-   ```bash
-   git clone https://github.com/yourusername/Movie_Recommender.git
-   cd Movie_Recommender
-   ```
-
-2. **Install dependencies**
-
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-3. **Run the app**
-
-   ```bash
-   streamlit run app.py
-   ```
-
-Then open **[http://localhost:8501](http://localhost:8501)** in your browser.
-
----
-
-## 🛠️ Requirements
-
-In your `requirements.txt`, include:
-
-```
-streamlit
-pickle5
-requests
+numpy
 pandas
+requests
+streamlit
+scikit-learn
+nltk
 ```
 
----
-
-## ☁️ Deployment on Streamlit Cloud
-
-1. Push your project to a **public GitHub repository**.
-2. Go to [Streamlit Cloud](https://share.streamlit.io/).
-3. Sign in with GitHub and click **New app**.
-4. Select your repository and `app.py` as the entry file.
-5. Click **Deploy** 🎉
-
-Streamlit will install dependencies from `requirements.txt` automatically.
-
----
-
-## 🔑 API Key
-
-This project uses the **TMDb API**.
-Replace the placeholder key inside `fetch_poster` function in `app.py`:
+After install, run:
 
 ```python
-response = requests.get(
-    f"https://api.themoviedb.org/3/movie/{movie_id}?api_key=YOUR_API_KEY&language=en-US"
-)
+import nltk
+nltk.download('punkt')
 ```
 
-👉 You can set your API key as a **Streamlit Secret** (recommended for online use):
+## ▶️ Run Locally
 
-1. In Streamlit Cloud, go to your app → **Settings** → **Secrets**.
-2. Add:
+```bash
+streamlit run app.py
+```
 
-   ```toml
-   TMDB_API_KEY="your_api_key_here"
-   ```
-3. Update your code:
+## 🌍 Run Online
 
-   ```python
-   import streamlit as st
+1. Push this project to GitHub.
+2. Go to [Streamlit Cloud](https://streamlit.io/cloud) → deploy new app.
+3. Select your GitHub repo and `app.py` file.
+4. Done! Your movie recommender will be online.
 
-   api_key = st.secrets["TMDB_API_KEY"]
-   ```
+## 🎥 Demo
+
+The app asks you to choose a movie and shows **5 recommended movies** with their posters.
